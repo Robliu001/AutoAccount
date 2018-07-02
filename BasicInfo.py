@@ -1,5 +1,6 @@
 from typing import List, Iterator
-
+DIR_IN = r".\input\\"
+DIR_OUT = r".\output\\"
 
 class Product(object):
     """每个产品的基本数据信息"""
@@ -19,6 +20,7 @@ class Product(object):
         self.product = product
         self.inventory = inventory
         return self
+
 
 class ProductList:
     """初始化所有产品数据，创建productlist存储产品信息"""
@@ -97,6 +99,7 @@ class ProductList:
     rst_PA = productlist[20]
     others = productlist[21]
 
+
 class TransitExcel:
     inventorynum = 1
     supplierName = "C";
@@ -121,6 +124,7 @@ class TransitExcel:
     sheetName = "sheet1";
     excelName = "\\在途货物余额表.xls";
 
+
 class TrialBalanceExcel:
     billOfAccountName = "C";
     billOfAccountNum = 3;
@@ -137,6 +141,7 @@ class TrialBalanceExcel:
     humanSheet = "sheet2";
     excelName = "\\发生额及余额表.xls";
 
+
 class OutBoundExcel:
     inventoryName = "G";
     inventoryNum = 7;
@@ -147,6 +152,7 @@ class OutBoundExcel:
     rowOriginalPosition = 2;
     sheetName = "sheet1";
     excelName = "\\出库汇总表.XLS";
+
 
 class ReceiveAccount:
     balanceName = "R";
@@ -161,6 +167,7 @@ class ReceiveAccount:
     rowOriginalPosition = 3;
     excelName = "\\应收账龄分析.xls";
     dayOffset = 90;
+
 
 class PayAccount:
     billDateTimeName = "J";
@@ -180,10 +187,12 @@ class PayAccount:
     rowOriginalPosition = 3;
     excelName = "\\应付账龄分析.xls";
 
+
 class Supply(object):
     def __init__(self, serialnum, name):
         self.serialnum = serialnum
         self.name = name
+
 
 class SupplyList:
     kuibyshevazotHK = Supply("Kuibyshevazot HK","V002")
@@ -192,6 +201,7 @@ class SupplyList:
     ojsckuibyshevazot = Supply("OJSC Kuibyshevazot", "V001")
     # special one find in trialBalance table.
     chinaSomething = Supply("warehouse fee and transportation fee include the purchase in china", "220203")
+
 
 class TonnsExcel:
     originalName = "\\tonns of good";
@@ -206,6 +216,7 @@ class TonnsExcel:
     columnMonthOffsetName = "C";
     rowMonthPosition = 1;
     secret = "753";
+
 
 class ContractedFree:
     paSheetName = "PA";
