@@ -1,6 +1,9 @@
 from typing import List, Iterator
-DIR_IN = r".\input\\"
-DIR_OUT = r".\output\\"
+import os
+
+DIR_IN = os.getcwd() + "\input\\"
+DIR_OUT =os.getcwd() + "\output\\"
+SECRET = "753"
 
 class Product(object):
     """每个产品的基本数据信息"""
@@ -123,35 +126,38 @@ class TransitExcel:
     rowOriginalPosition = 5;
     sheetName = "sheet1";
     excelName = "\\在途货物余额表.xls";
+    inPath = DIR_IN + excelName
 
 
 class TrialBalanceExcel:
-    billOfAccountName = "C";
-    billOfAccountNum = 3;
-    startName = "H";
-    startNum = 8;
-    currentBorrowName = "J";
-    currentBorrowNum = 10;
-    currentLoadName = "L";
-    currentLoanNum = 12;
-    endName = "0";
-    endNum = 15;
-    rowOriginalPosition = 2;
-    machineSheet = "sheet1";
-    humanSheet = "sheet2";
-    excelName = "\\发生额及余额表.xls";
+    billOfAccountName = "C"
+    billOfAccountNum = 3
+    startName = "H"
+    startNum = 8
+    currentBorrowName = "J"
+    currentBorrowNum = 10
+    currentLoadName = "L"
+    currentLoanNum = 12
+    endName = "0"
+    endNum = 15
+    rowOriginalPosition = 2
+    machineSheet = "sheet1"
+    humanSheet = "sheet2"
+    excelName = "\\发生额及余额表.xls"
+    inPath = DIR_IN + excelName
 
 
 class OutBoundExcel:
-    inventoryName = "G";
-    inventoryNum = 7;
-    quatityName = "K";
-    quatityNum = 11;
-    amountName = "M";
-    amountNum = 13;
-    rowOriginalPosition = 2;
-    sheetName = "sheet1";
-    excelName = "\\出库汇总表.XLS";
+    inventoryName = "G"
+    inventoryNum = 7
+    quatityName = "K"
+    quatityNum = 11
+    amountName = "M"
+    amountNum = 13
+    rowOriginalPosition = 2
+    sheetName = "sheet1"
+    excelName = "\\出库汇总表.XLS"
+    inPath = DIR_IN + excelName
 
 
 class ReceiveAccount:
@@ -181,9 +187,7 @@ class PayAccount:
     supplySerialNum = 1;
     surplusName = "Q";
     surplusNum = 17;
-    subjectDetailArray = None
-    subjectDetailArray[0] = "220201";
-    subjectDetailArray[1] = "220202";
+    subjectDetailArray = ["220201", "220202"]
     rowOriginalPosition = 3;
     excelName = "\\应付账龄分析.xls";
 
@@ -216,6 +220,8 @@ class TonnsExcel:
     columnMonthOffsetName = "C";
     rowMonthPosition = 1;
     secret = "753";
+    inPath = DIR_IN + originalName + excelEndName
+    outPath = DIR_OUT + originalName + excelEndName
 
 
 class ContractedFree:
