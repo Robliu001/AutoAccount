@@ -1,6 +1,7 @@
 import os
 from BasicInfo import *
 import win32com.client
+import re
 
 
 class ExcelApp(object):
@@ -296,7 +297,7 @@ class ExcelApp(object):
                         sheet.Cells(i, args[x]).EntireColumn.AutoFit()
                         r1 = sheet.Cells(i, args[x]).Value
                         if r1:
-                            current[x + 1] += float(str(r1))
+                            current[x + 1] += float(re.sub('[,]','',str(r1)))
                 else:
                     current = []
                     current.append(sname)
@@ -304,7 +305,7 @@ class ExcelApp(object):
                         sheet.Cells(i, x).EntireColumn.AutoFit()
                         r1 = sheet.Cells(i, x).Value
                         if r1 :
-                            current.append(float(str(r1)))
+                            current.append(float(re.sub('[,]','',str(r1))))
                         else:
                             current.append(0)
                     result.append(current)
@@ -314,7 +315,7 @@ class ExcelApp(object):
                 sheet.Cells(sheet.UsedRange.Rows.Count, x).EntireColumn.AutoFit()
                 r1 = sheet.Cells(sheet.UsedRange.Rows.Count, x).Value
                 if r1:
-                    current.append(float(str(r1)))
+                    current.append(float(re.sub('[,]','',str(r1))))
                 else:
                     current.append(0)
             result.append(current)
@@ -332,8 +333,8 @@ class ExcelApp(object):
 if __name__ == "__main__":
     transit = None
     try:
-        transit = ExcelApp()
-        transit.open(TransitExcel.inPath, SECRET)
+        outB = ExcelApp()
+        outB.open(OutBoundExcel.inPath)
         tranColumn = (TransitExcel.currentPurchaseQuatityNum, TransitExcel.currentCloseAccountAmountNum)
         tranSheet = transit.getsheetfromname(TransitExcel.sheetName)
         tranQuaAmountList = transit.sumandnamelist(*tranColumn, nameindex=TransitExcel.inventorynum, startrow=TransitExcel.rowOriginalPosition, sheet=tranSheet)

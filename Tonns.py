@@ -61,18 +61,14 @@ class Tonns(object):
 
             tranColumn = (TransitExcel.currentPurchaseQuatityNum, TransitExcel.currentCloseAccountAmountNum)
             tranQuaAmountList = self.transit.sumandnamelist(*tranColumn,nameindex=TransitExcel.inventorynum,startrow=TransitExcel.rowOriginalPosition,sheet=self.tranSheet)
-            for x in tranQuaAmountList:
-                print(x)
             outColumn = (OutBoundExcel.quatityNum, OutBoundExcel.amountNum)
             outBoundList = self.outB.sumandnamelist(*outColumn,nameindex=OutBoundExcel.inventoryNum,startrow=OutBoundExcel.rowOriginalPosition,sheet=self.outSheet)
-            for x in outBoundList:
-                print(x)
             pAmountSum: float = 0
             sAmountSum: float = 0
             sQuatitySum: float = 0
-
+            print(1)
             for x in ProductList.productlist:
-                if x is ProductList.others.tonns:
+                if x is ProductList.others:
                     continue
                 isHave: bool = False
                 # tansit Quatity Amount List
