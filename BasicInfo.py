@@ -52,7 +52,7 @@ class ProductList:
                        ("        RST", "0000", "0000", 14, False),
                        ("others", "0000", "0000", 26, False)]
     for x in range(len(l1)):
-        pr = Product(l1[x][0],l1[x][1],l1[x][2],l1[x][3],l1[x][4])
+        pr = Product(*l1[x])
         productlist.append(pr)
     l2: List[tuple] = [("1402030102", "14020301", "1402030101", "14050201"),
                        ("1402030202", "14020302", "1402030201", "14050202"),
@@ -77,7 +77,7 @@ class ProductList:
                        ("null", "000000", "null", "null"),
                        ("220203", "140299", "null", "140511")]
     for x in range(len(productlist)):
-        productlist[x].accountingset(l2[x][0],l2[x][1],l2[x][2],l2[x][3])
+        productlist[x].accountingset(*l2[x])
 
     pa6_25 = productlist[0]
     pa6_27 = productlist[1]
@@ -125,7 +125,7 @@ class TransitExcel:
     currentSurplusAmountNum = 16;
     rowOriginalPosition = 5;
     sheetName = "sheet1";
-    excelName = "\\在途货物余额表.xls";
+    excelName = "在途货物余额表.xls";
     inPath = DIR_IN + excelName
 
 
@@ -137,13 +137,13 @@ class TrialBalanceExcel:
     currentBorrowName = "J"
     currentBorrowNum = 10
     currentLoadName = "L"
-    currentLoanNum = 12
+    currentLoadNum = 12
     endName = "0"
     endNum = 15
     rowOriginalPosition = 2
     machineSheet = "sheet1"
     humanSheet = "sheet2"
-    excelName = "\\发生额及余额表.xls"
+    excelName = "发生额及余额表.xls"
     inPath = DIR_IN + excelName
 
 
@@ -156,7 +156,7 @@ class OutBoundExcel:
     amountNum = 13
     rowOriginalPosition = 2
     sheetName = "sheet1"
-    excelName = "\\出库汇总表.XLS"
+    excelName = "出库汇总表.XLS"
     inPath = DIR_IN + excelName
 
 
@@ -171,7 +171,7 @@ class ReceiveAccount:
     billDateTimeName = "J";
     billDateTimeNum = 10;
     rowOriginalPosition = 3;
-    excelName = "\\应收账龄分析.xls";
+    excelName = "应收账龄分析.xls";
     dayOffset = 90;
 
 
@@ -189,7 +189,7 @@ class PayAccount:
     surplusNum = 17;
     subjectDetailArray = ["220201", "220202"]
     rowOriginalPosition = 3;
-    excelName = "\\应付账龄分析.xls";
+    excelName = "应付账龄分析.xls";
 
 
 class Supply(object):
@@ -208,7 +208,7 @@ class SupplyList:
 
 
 class TonnsExcel:
-    originalName = "\\tonns of good";
+    originalName = "tonns of good";
     excelEndName = ".xlsx";
     purchaseName = "Purchase (RMB)";
     salesName = "Sales (tn)";

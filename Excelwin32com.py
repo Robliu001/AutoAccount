@@ -1,5 +1,5 @@
 import os
-
+from BasicInfo import *
 import win32com.client
 
 
@@ -75,7 +75,8 @@ class ExcelApp(object):
         else:
             result = True
         finally:
-            del self.app
+            if self.app:
+                del self.app
             return result
 
     def createsheets(self, *args):
@@ -99,8 +100,9 @@ class ExcelApp(object):
         if self.wBook is None or self.wBook.Worksheets.Count < 1:
             return None
         else:
+            sheet = None
             try:
-                sheet = self.eApp.wBook.Worksheets(name)
+                sheet = self.wBook.Worksheets(name)
             except Exception as e:
                 print(e)
             else:
@@ -134,9 +136,9 @@ class ExcelApp(object):
                 sheet = self.app.ActiveSheet
             if format is None:
                 format = []
-                for i in range(len(args)):
+                for i in range(args.__len__()):
                     format.append(None)
-            for x in range(len(args)):
+            for x in range(args.__len__()):
                 cell = sheet.Cells(rowindex, colindex)
                 if format[x] is not None:
                     cell.NumberFormat = format[x]
@@ -192,7 +194,9 @@ class ExcelApp(object):
             for i in range(startrow, sheet.UsedRange.Rows.Count + 1):
                 sname = str(sheet.Cells(i, nameindex))
                 if sname == name:
-                    result += float(str(sheet.Cells(i, valueindex).Value))
+                    r1 = sheet.Cells(i, valueindex).Value
+                    if r1:
+                        result += float(str(r1))
         except Exception as e:
             print(e)
             result = None
@@ -209,7 +213,9 @@ class ExcelApp(object):
             for i in range(startrow, sheet.UsedRange.Rows.Count + 1):
                 sname = str(sheet.Cells(i, nameindex))
                 if sname == name:
-                    result = float(str(sheet.Cells(i, valueindex).Value))
+                    r1 = sheet.Cells(i, valueindex).Value
+                    if r1:
+                        result = float(str(r1))
                     break
         except Exception as e:
             print(e)
@@ -246,7 +252,6 @@ class ExcelApp(object):
             value //= 26
 
         for i in range(ilist.__len__() - 1):
-            print(ilist.__len__())
             if ilist[i] == 0:
                 ilist[i + 1] -= 1
                 ilist[i] = 26
@@ -254,7 +259,6 @@ class ExcelApp(object):
             ilist.remove(ilist[-1])
         ilist.reverse()
         for x in ilist:
-            print(x)
             result += str(chr((x + 64)))
         return result
 
@@ -276,8 +280,9 @@ class ExcelApp(object):
             if sheet is None:
                 sheet = self.app.ActiveSheet
             for i in range(startrow, sheet.UsedRange.Rows.Count):
-                sname = str(sheet.Cells(i, nameindex))
+                sname = str(sheet.Cells(i, nameindex).Value)
                 if ExcelApp.ishavechinese(sname.strip()):
+                    print("含有汉字")
                     continue
                 isHave = False
                 current = None
@@ -287,21 +292,31 @@ class ExcelApp(object):
                         current = x
                         break
                 if isHave:
-                    for x in len(args):
+                    for x in range(args.__len__()):
                         sheet.Cells(i, args[x]).EntireColumn.AutoFit()
-                        current[x + 1] += float(str(sheet.Cells(i, args[x]).Value))
+                        r1 = sheet.Cells(i, args[x]).Value
+                        if r1:
+                            current[x + 1] += float(str(r1))
                 else:
                     current = []
                     current.append(sname)
                     for x in args:
                         sheet.Cells(i, x).EntireColumn.AutoFit()
-                        current.append(float(str(sheet.Cells(i, x).Value)))
+                        r1 = sheet.Cells(i, x).Value
+                        if r1 :
+                            current.append(float(str(r1)))
+                        else:
+                            current.append(0)
                     result.append(current)
             current = []
             current.append("sum")
             for x in args:
                 sheet.Cells(sheet.UsedRange.Rows.Count, x).EntireColumn.AutoFit()
-                current.append(float(str(sheet.Cells(sheet.UsedRange.Rows.Count, x).Value)))
+                r1 = sheet.Cells(sheet.UsedRange.Rows.Count, x).Value
+                if r1:
+                    current.append(float(str(r1)))
+                else:
+                    current.append(0)
             result.append(current)
         except Exception as e:
             print(e)
@@ -315,18 +330,16 @@ class ExcelApp(object):
 
 
 if __name__ == "__main__":
-    eApp = ExcelApp()
-    path = "D:\\backup\YingWork\output\\test.xlsx"
-    eApp.create(path)
-    eApp.open(path)
-    eApp.createsheets("s1", "s2", "s3")
-    s1 = eApp.getsheetfromname("s1")
-    eApp.inserttitletosheet(*("T1", "T2", "T3", "T4", "T5"), rowindex=1, sheet=s1)
-    eApp.insertcellstosheet(*(1, 2.1, 3.11, 0.55, "xxx"), rowindex=2, format= \
-        [ExcelApp.typeOfFormat["Int"], ExcelApp.typeOfFormat["Double1P"], ExcelApp.typeOfFormat["Double2P"],
-         ExcelApp.typeOfFormat["Percent"], None], \
-                            sheet=s1)
-    line = eApp.getrownumfromsheet("0.55", 4, s1)
-    print(line)
-    eApp.close()
+    transit = None
+    try:
+        transit = ExcelApp()
+        transit.open(TransitExcel.inPath, SECRET)
+        tranColumn = (TransitExcel.currentPurchaseQuatityNum, TransitExcel.currentCloseAccountAmountNum)
+        tranSheet = transit.getsheetfromname(TransitExcel.sheetName)
+        tranQuaAmountList = transit.sumandnamelist(*tranColumn, nameindex=TransitExcel.inventorynum, startrow=TransitExcel.rowOriginalPosition, sheet=tranSheet)
+        for x in tranQuaAmountList:
+            print(x)
+    finally:
+        if transit:
+            transit.close()
 
