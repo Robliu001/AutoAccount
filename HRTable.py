@@ -3,6 +3,7 @@ import time
 from Excelwin32com import ExcelApp
 import shutil
 import os
+import datetime
 import sys
 
 
@@ -10,7 +11,8 @@ class HRTable(object):
     """datetime:%y-%m"""
 
     def __init__(self, dtime):
-        self.sheetName = time.strftime("%B %y", time.strptime(dtime[-2:].lstrip("0") + "-" + dtime[:4],"%m-%Y"))
+        self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), 1,23,0,0)
+        self.sheetName = self.dtime.strftime("%B %y")
         self.excel = None
         self.sheet = None
 
@@ -27,10 +29,12 @@ class HRTable(object):
         if os.path.exists(HRTable.excelOutPath):
             os.remove(HRTable.excelOutPath)
         shutil.copyfile(HRTable.excelInPath, HRTable.excelOutPath)
-        self.excel = ExcelApp()
-        self.excel.open(HRTable.excelOutPath, SECRET)
-        self.excel.createsheets(self.sheetName)
-        return self.excel.app, self.excel.wBook
+        self.hrApp = ExcelApp()
+        self.hrApp.open(HRTable.excelOutPath)
+        self.hrSheetLst = self.hrApp.wBook.Sheets[self.hrApp.wBook.Sheets.Count - 1]
+        self.hrSheet = self.hrApp.createsheets(self.sheetName)
+
+
 
     def createpeoplelist(self):
         f = open(HRTable.hrText)
