@@ -55,8 +55,12 @@ class HRTable(object):
         basicinfoclose()
 
     def main(self):
+        print("HR 表格开始生成")
+        print("生成人员列表，根据hr.txt.")
         self.createpeoplelist()
+        print("生成新的sheet")
         self.createnewsheet()
+        print("处理数据")
         self.handle()
 
 
