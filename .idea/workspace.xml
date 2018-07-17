@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb589eb2-180a-4cb4-b6b6-61117885de3e" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/YingWork.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/YingWork.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BasicInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/BasicInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Excelwin32com.py" beforeDir="false" afterPath="$PROJECT_DIR$/Excelwin32com.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HRTable.py" beforeDir="false" afterPath="$PROJECT_DIR$/HRTable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tonns.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tonns.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/Inventory.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/output/Inventory.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output/tonns of good_new.xlsx" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +17,7 @@
     <SUITE FILE_PATH="coverage/YingWork$Tonns.coverage" NAME="Tonns Coverage Results" MODIFIED="1531824779748" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/AutoAccount$Excelwin32com.coverage" NAME="Excelwin32com Coverage Results" MODIFIED="1531364762395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/YingWork$test.coverage" NAME="test Coverage Results" MODIFIED="1530260946253" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/YingWork$HRTable.coverage" NAME="HRTable Coverage Results" MODIFIED="1530855375953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/YingWork$HRTable.coverage" NAME="HRTable Coverage Results" MODIFIED="1531829767576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/YingWork$main.coverage" NAME="main Coverage Results" MODIFIED="1529919975041" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/YingWork$BasicInfo.coverage" NAME="BasicInfo Coverage Results" MODIFIED="1531824628051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/YingWork$Excelwin32com.coverage" NAME="Excelwin32com Coverage Results" MODIFIED="1531131648212" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -37,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/BasicInfo.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="363">
-              <caret line="241" column="22" lean-forward="true" selection-start-line="241" selection-start-column="22" selection-end-line="241" selection-end-column="22" />
+              <caret line="241" column="22" selection-start-line="241" selection-start-column="22" selection-end-line="241" selection-end-column="22" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
                 <element signature="e#157#696#0" />
@@ -56,8 +50,8 @@
       <file leaf-file-name="Tonns.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tonns.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="152" column="16" lean-forward="true" selection-start-line="152" selection-start-column="16" selection-end-line="152" selection-end-column="16" />
+            <state relative-caret-position="460">
+              <caret line="146" column="31" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -68,8 +62,8 @@
       <file leaf-file-name="HRTable.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HRTable.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="497">
-              <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+            <state relative-caret-position="109">
+              <caret line="53" column="26" lean-forward="true" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -80,8 +74,8 @@
       <file leaf-file-name="Excelwin32com.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Excelwin32com.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="481">
-              <caret line="80" column="28" lean-forward="true" selection-start-line="80" selection-start-column="28" selection-end-line="80" selection-end-column="28" />
+            <state relative-caret-position="514">
+              <caret line="173" column="25" lean-forward="true" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="25" />
               <folding>
                 <element signature="e#138#231#0" />
                 <element signature="e#280#772#0" />
@@ -94,12 +88,7 @@
                 <element signature="e#1413#1552#0" />
                 <element signature="e#1632#1894#0" />
                 <element signature="e#2176#2211#0" />
-                <element signature="e#2419#2853#0" />
-                <element signature="e#2508#2853#0" />
-                <element signature="e#2529#2703#0" />
-                <element signature="e#2592#2703#0" />
                 <element signature="e#2901#3239#0" />
-                <element signature="e#3009#3239#0" />
                 <element signature="e#3314#3833#0" />
                 <element signature="e#3331#3671#0" />
                 <element signature="e#3455#3671#0" />
@@ -149,8 +138,6 @@
                 <element signature="e#9377#9656#0" />
                 <element signature="e#9802#10090#0" />
                 <element signature="e#10169#10203#0" />
-                <element signature="e#10424#10630#0" />
-                <element signature="e#10453#10575#0" />
                 <element signature="e#10597#10630#0" />
               </folding>
             </state>
@@ -160,8 +147,8 @@
       <file leaf-file-name="dynamic.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/win32com/client/dynamic.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9200">
-              <caret line="470" selection-start-line="470" selection-end-line="470" />
+            <state relative-caret-position="-442">
+              <caret line="263" column="13" selection-start-line="263" selection-start-column="13" selection-end-line="263" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -207,9 +194,9 @@
         <option value="$PROJECT_DIR$/Excel_win32com" />
         <option value="$PROJECT_DIR$/Excel_win32com.py" />
         <option value="$PROJECT_DIR$/BasicInfo.py" />
-        <option value="$PROJECT_DIR$/Excelwin32com.py" />
         <option value="$PROJECT_DIR$/Tonns.py" />
         <option value="$PROJECT_DIR$/HRTable.py" />
+        <option value="$PROJECT_DIR$/Excelwin32com.py" />
       </list>
     </option>
   </component>
@@ -223,10 +210,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="70" />
-    <option name="y" value="6" />
-    <option name="width" value="1056" />
-    <option name="height" value="1087" />
+    <option name="x" value="135" />
+    <option name="y" value="1" />
+    <option name="width" value="958" />
+    <option name="height" value="1083" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -274,7 +261,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Tonns">
+  <component name="RunManager" selected="Python.HRTable">
     <configuration name="BasicInfo" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="YingWork" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -379,10 +366,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.HRTable" />
         <item itemvalue="Python.Tonns" />
         <item itemvalue="Python.BasicInfo" />
         <item itemvalue="Python.Excelwin32com" />
-        <item itemvalue="Python.HRTable" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -401,7 +388,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="70" y="6" width="1056" height="1087" extended-state="0" />
+    <frame x="135" y="1" width="958" height="1083" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -409,7 +396,7 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.88653636" visible="true" weight="0.27328557" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.88653636" visible="true" weight="0.40184996" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info content_ui="combo" id="Project" order="0" weight="0.26826924" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -436,7 +423,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="19" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -750,13 +737,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/win32com/client/dynamic.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9200">
-          <caret line="470" selection-start-line="470" selection-end-line="470" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2018.1/system/python_stubs/-2061814930/time.py" />
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/datetime.pyi">
       <provider selected="true" editor-type-id="text-editor">
@@ -765,10 +745,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/BasicInfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="241" column="22" selection-start-line="241" selection-start-column="22" selection-end-line="241" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+            <element signature="e#157#696#0" />
+            <element signature="e#722#4880#0" />
+            <element signature="e#817#2455#0" />
+            <element signature="e#4942#5842#0" />
+            <element signature="e#5806#6386#0" />
+            <element signature="e#6341#6737#0" />
+            <element signature="e#6698#7170#0" />
+            <element signature="e#7597#8195#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Tonns.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="146" column="31" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/win32com/client/dynamic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-442">
+          <caret line="263" column="13" selection-start-line="263" selection-start-column="13" selection-end-line="263" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Excelwin32com.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="481">
-          <caret line="80" column="28" lean-forward="true" selection-start-line="80" selection-start-column="28" selection-end-line="80" selection-end-column="28" />
+        <state relative-caret-position="514">
+          <caret line="173" column="25" lean-forward="true" selection-start-line="173" selection-start-column="25" selection-end-line="173" selection-end-column="25" />
           <folding>
             <element signature="e#138#231#0" />
             <element signature="e#280#772#0" />
@@ -781,12 +796,7 @@
             <element signature="e#1413#1552#0" />
             <element signature="e#1632#1894#0" />
             <element signature="e#2176#2211#0" />
-            <element signature="e#2419#2853#0" />
-            <element signature="e#2508#2853#0" />
-            <element signature="e#2529#2703#0" />
-            <element signature="e#2592#2703#0" />
             <element signature="e#2901#3239#0" />
-            <element signature="e#3009#3239#0" />
             <element signature="e#3314#3833#0" />
             <element signature="e#3331#3671#0" />
             <element signature="e#3455#3671#0" />
@@ -836,45 +846,15 @@
             <element signature="e#9377#9656#0" />
             <element signature="e#9802#10090#0" />
             <element signature="e#10169#10203#0" />
-            <element signature="e#10424#10630#0" />
-            <element signature="e#10453#10575#0" />
             <element signature="e#10597#10630#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BasicInfo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="241" column="22" lean-forward="true" selection-start-line="241" selection-start-column="22" selection-end-line="241" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-            <element signature="e#157#696#0" />
-            <element signature="e#722#4880#0" />
-            <element signature="e#817#2455#0" />
-            <element signature="e#4942#5842#0" />
-            <element signature="e#5806#6386#0" />
-            <element signature="e#6341#6737#0" />
-            <element signature="e#6698#7170#0" />
-            <element signature="e#7597#8195#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tonns.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="152" column="16" lean-forward="true" selection-start-line="152" selection-start-column="16" selection-end-line="152" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HRTable.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="497">
-          <caret line="48" column="31" selection-start-line="48" selection-start-column="31" selection-end-line="48" selection-end-column="31" />
+        <state relative-caret-position="109">
+          <caret line="53" column="26" lean-forward="true" selection-start-line="53" selection-start-column="26" selection-end-line="53" selection-end-column="26" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>

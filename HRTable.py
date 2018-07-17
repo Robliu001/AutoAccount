@@ -13,7 +13,7 @@ class HRTable(object):
     def __init__(self, dtime):
         self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), 1,23,0,0)
         self.sheetName = self.dtime.strftime("%B %y")
-        self.excel = None
+        self.excel: ExcelApp = None
         self.sheet = None
         self.sheetLst = None
         self.pleDic = {}
@@ -32,9 +32,9 @@ class HRTable(object):
             os.remove(HRTable.excelOutPath)
         shutil.copyfile(HRTable.excelInPath, HRTable.excelOutPath)
         self.excel = ExcelApp()
-        self.excel.open(HRTable.excelOutPath)
-        self.sheetLst = self.excel.wBook.Sheets[self.hrApp.wBook.Sheets.Count - 1]
-        self.sheet = self.hrApp.createsheets(self.sheetName)
+        self.excel.open(HRTable.excelOutPath, SECRET)
+        self.sheetLst = self.excel.wBook.Sheets[self.excel.wBook.Sheets.Count - 1]
+        self.sheet = self.excel.createsheets(self.sheetName)[0]
 
     def createpeoplelist(self):
         f = open(HRTable.hrText)
@@ -43,18 +43,26 @@ class HRTable(object):
         for x in l:
             key, value = x.strip('\n').split(':')
             self.pleDic[key] = float(value)
+        f.close()
 
     def handle(self):
-        
+        self.sheetLst.Range("A1", "J42").Copy(self.sheet.Range("A1", "J42"))
+
+    def close(self):
+        self.sheetLst = None
+        self.sheet = None
+        self.excel.close()
+        basicinfoclose()
 
     def main(self):
         self.createpeoplelist()
         self.createnewsheet()
+        self.handle()
 
 
 if __name__ == "__main__":
-    hr = HRTable("201806")
-    # hr.createnewsheet()
-    if hr.excel is not None:
-        hr.excel.close()
+    hr = HRTable("201608")
+    hr.main()
+    hr.close()
+
 

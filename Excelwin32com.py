@@ -88,7 +88,7 @@ class ExcelApp(object):
             try:
                 sheets = []
                 for x in args:
-                    sheet = self.wBook.Worksheets.Add()
+                    sheet = self.wBook.Worksheets.Add(None, self.wBook.Worksheets[self.wBook.Worksheets.Count - 1])
                     sheet.Name = x
                     sheets.append(sheet)
             except Exception as e:
