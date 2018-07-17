@@ -1,5 +1,6 @@
 from typing import List, Iterator
 import os
+from Excelwin32com import ExcelApp
 
 DIR_IN = os.getcwd() + "\input\\"
 DIR_OUT =os.getcwd() + "\output\\"
@@ -105,28 +106,36 @@ class ProductList:
 
 class TransitExcel:
     inventorynum = 1
-    supplierName = "C";
-    supplierNum = 3;
-    lastQuatityName = "F";
-    lastQuatityNum = 6;
-    lastAmountName = "G";
-    lastAmountNum = 7;
-    currentPurchaseQuatityName = "H";
-    currentPurchaseQuatityNum = 8;
-    currentPurchaseAmountName = "I";
-    currentPurchaseAmountNum = 9;
-    currentCloseAccountQuatityName = "L";
-    currentCloseAccountQuatityNum = 12;
-    currentCloseAccountAmountName = "M";
-    currentCloseAccountAmountNum = 13;
-    currentSurplusQuatityName = "O";
-    currentSurplusQuatityNum = 15;
-    currentSurplusAmountName = "P";
-    currentSurplusAmountNum = 16;
-    rowOriginalPosition = 5;
-    sheetName = "sheet1";
-    excelName = "在途货物余额表.xls";
+    supplierName = "C"
+    supplierNum = 3
+    lastQuatityName = "F"
+    lastQuatityNum = 6
+    lastAmountName = "G"
+    lastAmountNum = 7
+    currentPurchaseQuatityName = "H"
+    currentPurchaseQuatityNum = 8
+    currentPurchaseAmountName = "I"
+    currentPurchaseAmountNum = 9
+    currentCloseAccountQuatityName = "L"
+    currentCloseAccountQuatityNum = 12
+    currentCloseAccountAmountName = "M"
+    currentCloseAccountAmountNum = 13
+    currentSurplusQuatityName = "O"
+    currentSurplusQuatityNum = 15
+    currentSurplusAmountName = "P"
+    currentSurplusAmountNum = 16
+    rowOriginalPosition = 5
+    sheetName = "sheet1"
+    excelName = "在途货物余额表.xls"
     inPath = DIR_IN + excelName
+    excel = ExcelApp()
+    excel.open(inPath, SECRET)
+    sheet = excel.getsheetfromname(sheetName)
+
+    @staticmethod
+    def close():
+        TransitExcel.sheet = None
+        TransitExcel.excel.close()
 
 
 class TrialBalanceExcel:
@@ -141,10 +150,20 @@ class TrialBalanceExcel:
     endName = "0"
     endNum = 15
     rowOriginalPosition = 2
-    machineSheet = "sheet1"
-    humanSheet = "sheet2"
+    machineName = "sheet1"
+    humanName = "sheet2"
     excelName = "发生额及余额表.xls"
     inPath = DIR_IN + excelName
+    excel = ExcelApp()
+    excel.open(inPath)
+    mSheet = excel.getsheetfromname(machineName)
+    hSheet = excel.getsheetfromname(humanName)
+
+    @staticmethod
+    def close():
+        TrialBalanceExcel.msheet = None
+        TrialBalanceExcel.hsheet = None
+        TrialBalanceExcel.excel.close()
 
 
 class OutBoundExcel:
@@ -158,38 +177,73 @@ class OutBoundExcel:
     sheetName = "sheet1"
     excelName = "出库汇总表.XLS"
     inPath = DIR_IN + excelName
+    excel = ExcelApp()
+    excel.open(inPath)
+    sheet = excel.getsheetfromname(sheetName)
+
+    @staticmethod
+    def close():
+        OutBoundExcel.sheet = None
+        OutBoundExcel.excel.close()
 
 
 class ReceiveAccount:
-    balanceName = "R";
-    balanceNum = 18;
-    customSerialName = "A";
-    customSerialNum = 1;
-    dayName = "U";
-    dayNum = 21;
-    sheetName = "sheet1";
-    billDateTimeName = "J";
-    billDateTimeNum = 10;
-    rowOriginalPosition = 3;
-    excelName = "应收账龄分析.xls";
-    dayOffset = 90;
+    balanceName = "R"
+    balanceNum = 18
+    customSerialName = "A"
+    customSerialNum = 1
+    dayName = "U"
+    dayNum = 21
+    sheetName = "sheet1"
+    billDateTimeName = "J"
+    billDateTimeNum = 10
+    rowOriginalPosition = 3
+    excelName = "应收账龄分析.xls"
+    inPath = DIR_IN + excelName
+    dayOffset = 90
+    excel = ExcelApp()
+    excel.open(inPath)
+    sheet = excel.getsheetfromname(sheetName)
+
+    @staticmethod
+    def close():
+        ReceiveAccount.sheet = None
+        ReceiveAccount.excel.close()
 
 
 class PayAccount:
-    billDateTimeName = "J";
-    billDateTimeNum = 10;
-    dayOffset = 90;
-    dayNum = 20;
-    sheetName = "sheet1";
-    subjectName = "F";
-    subjectNum = 6;
-    supplySerialName = "A";
-    supplySerialNum = 1;
-    surplusName = "Q";
-    surplusNum = 17;
+    billDateTimeName = "J"
+    billDateTimeNum = 10
+    dayOffset = 90
+    dayNum = 20
+    sheetName = "sheet1"
+    subjectName = "F"
+    subjectNum = 6
+    supplySerialName = "A"
+    supplySerialNum = 1
+    surplusName = "Q"
+    surplusNum = 17
     subjectDetailArray = ["220201", "220202"]
-    rowOriginalPosition = 3;
-    excelName = "应付账龄分析.xls";
+    rowOriginalPosition = 3
+    sheetName = "sheet1"
+    excelName = "应付账龄分析.xls"
+    inPath = DIR_IN + excelName
+    excel = ExcelApp()
+    excel.open(inPath)
+    sheet = excel.getsheetfromname(sheetName)
+
+    @staticmethod
+    def close():
+        PayAccount.sheet = None
+        PayAccount.excel.close()
+
+
+def basicinfoclose():
+    PayAccount.close()
+    ReceiveAccount.close()
+    OutBoundExcel.close()
+    TrialBalanceExcel.close()
+    TransitExcel.close()
 
 
 class Supply(object):
@@ -238,7 +292,9 @@ class ContractedFree:
     rowOfYarnFiber = 12;
 
 
-
+if __name__ == "__main__":
+    print(1)
+    basicinfoclose()
 
 
 

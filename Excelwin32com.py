@@ -1,7 +1,6 @@
 import os
 import time
 
-from BasicInfo import *
 import win32com.client
 import re
 
@@ -336,7 +335,7 @@ if __name__ == "__main__":
     outB = None
     try:
         outB = ExcelApp()
-        outB.open(OutBoundExcel.inPath)
+        # outB.open(OutBoundExcel.inPath)
         sheet1 = outB.wBook.Sheets[1]
         print(sheet1.Name)
     finally:

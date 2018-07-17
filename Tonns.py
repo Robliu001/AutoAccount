@@ -8,16 +8,10 @@ class Tonns(object):
 
     def __init__(self, dtime):
         self.tonns : ExcelApp = None
-        self.transit : ExcelApp = None
-        self.trialB : ExcelApp = None # trialBalance
-        self.outB : ExcelApp = None # outBound
         self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), 1,23,0,0)
         print("生成月份：", self.dtime)
         self.qSheet = None
         self.aSheet = None
-        self.trialSheet = None
-        self.transSheet = None
-        self.outSheet = None
         self.colPtion = 0
 
     def createexcel(self):
@@ -28,23 +22,15 @@ class Tonns(object):
         shutil.copyfile(TonnsExcel.inPath, TonnsExcel.outPath)
         self.tonns = ExcelApp()
         self.tonns.open(TonnsExcel.outPath, SECRET)
-        self.transit = ExcelApp()
-        self.transit.open(TransitExcel.inPath, SECRET)
-        self.trialB = ExcelApp()
-        self.trialB.open(TrialBalanceExcel.inPath)
-        self.outB = ExcelApp()
-        self.outB.open(OutBoundExcel.inPath)
         self.qSheet = self.tonns.getsheetfromname(TonnsExcel.sheetNameQuantity)
         self.aSheet = self.tonns.getsheetfromname(TonnsExcel.sheetNameAmount)
-        self.trialSheet = self.trialB.getsheetfromname(TrialBalanceExcel.machineSheet)
-        self.tranSheet = self.transit.getsheetfromname(TransitExcel.sheetName)
-        self.outSheet = self.outB.getsheetfromname(OutBoundExcel.sheetName)
 
     def close(self):
+        self.qSheet = None
+        self.aSheet = None
         self.tonns.close()
-        self.transit.close()
-        self.trialB.close()
-        self.outB.close()
+        basicinfoclose()
+
 
     def computetonns(self):
         try:
@@ -60,9 +46,9 @@ class Tonns(object):
             print(str(self.aSheet.Cells(TonnsExcel.rowMonthPosition, self.colPtion).Value))
 
             tranColumn = (TransitExcel.currentPurchaseQuatityNum, TransitExcel.currentCloseAccountAmountNum)
-            tranQuaAmountList = self.transit.sumandnamelist(*tranColumn,nameindex=TransitExcel.inventorynum,startrow=TransitExcel.rowOriginalPosition,sheet=self.tranSheet)
+            tranQuaAmountList = TransitExcel.excel.sumandnamelist(*tranColumn,nameindex=TransitExcel.inventorynum,startrow=TransitExcel.rowOriginalPosition,sheet=TransitExcel.sheet)
             outColumn = (OutBoundExcel.quatityNum, OutBoundExcel.amountNum)
-            outBoundList = self.outB.sumandnamelist(*outColumn,nameindex=OutBoundExcel.inventoryNum,startrow=OutBoundExcel.rowOriginalPosition,sheet=self.outSheet)
+            outBoundList = OutBoundExcel.excel.sumandnamelist(*outColumn,nameindex=OutBoundExcel.inventoryNum,startrow=OutBoundExcel.rowOriginalPosition,sheet=OutBoundExcel.sheet)
             pAmountSum: float = 0
             sAmountSum: float = 0
             sQuatitySum: float = 0
@@ -79,7 +65,7 @@ class Tonns(object):
                         self.qSheet.Cells(x.tonnsPurchaseRowNum, self.colPtion).Value = y[1] / 1000
                     else:
                         self.qSheet.Cells(x.tonnsPurchaseRowNum, self.colPtion).Value = y[1]
-                    self.aSheet.Cells(x.tonnsPurchaseRowNum, self.colPtion).Value = y[2] + self.trialB.sumofspecialname(x.tariff, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.currentBorrowNum, TrialBalanceExcel.rowOriginalPosition, self.trialSheet)
+                    self.aSheet.Cells(x.tonnsPurchaseRowNum, self.colPtion).Value = y[2] + TransitExcel.excel.sumofspecialname(x.tariff, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.currentBorrowNum, TrialBalanceExcel.rowOriginalPosition, TrialBalanceExcel.mSheet)
                     isHave = True
                     pAmountSum +=y[2]
                     tranQuaAmountList.remove(y)
@@ -115,7 +101,7 @@ class Tonns(object):
             self.qSheet.Cells(ProductList.others.tonnsPurchaseRowNum, self.colPtion).Value = 0
             self.qSheet.Cells(ProductList.others.tonnsSalesRowNum, self.colPtion).Value = 0
             self.qSheet.Cells(ProductList.others.tonnsInventoriesRowNum, self.colPtion).Value = "=" + colPtionNameLastM + str(ProductList.others.tonnsInventoriesRowNum) + "+" + colPtionName + str(ProductList.others.tonnsPurchaseRowNum) + "-" + colPtionName + str(ProductList.others.tonnsSalesRowNum)
-            self.aSheet.Cells(ProductList.others.tonnsPurchaseRowNum, self.colPtion).Value = tranQuaAmountList[-1][2] - pAmountSum + self.trialB.sumofspecialname(ProductList.others.tariff, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.currentLoadNum, TrialBalanceExcel.rowOriginalPosition, self.trialSheet)
+            self.aSheet.Cells(ProductList.others.tonnsPurchaseRowNum, self.colPtion).Value = tranQuaAmountList[-1][2] - pAmountSum + TrialBalanceExcel.excel.sumofspecialname(ProductList.others.tariff, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.currentLoadNum, TrialBalanceExcel.rowOriginalPosition, TrialBalanceExcel.mSheet)
             self.aSheet.Cells(ProductList.others.tonnsSalesRowNum, self.colPtion).Value = outBoundList[-1][2] - sAmountSum
             self.aSheet.Cells(ProductList.others.tonnsInventoriesRowNum, self.colPtion).Value = "=" + colPtionNameLastM + str(ProductList.others.tonnsInventoriesRowNum) + "+" + colPtionName + str(ProductList.others.tonnsPurchaseRowNum) + "-" + colPtionName + str(ProductList.others.tonnsSalesRowNum)
             print("Quatity and Amount Sheet has done")
@@ -142,8 +128,8 @@ class Tonns(object):
         for i in range(ProductList.productlist.__len__()):
             trialBINVSheet.Cells(2 + i, 1).Value = ProductList.productlist[i].tonns
             trialBINVSheet.Cells(2 + i, 2).Value = self.aSheet.Cells(ProductList.productlist[i].tonnsInventoriesRowNum, self.colPtion)
-            sum1 = self.trialB.sumofspecialname(ProductList.productlist[i].transit_acc, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.endNum, TrialBalanceExcel.rowOriginalPosition, self.trialSheet)
-            sum2 = self.trialB.sumofspecialname(ProductList.productlist[i].inventory, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.endNum, TrialBalanceExcel.rowOriginalPosition, self.trialSheet)
+            sum1 = TrialBalanceExcel.excel.sumofspecialname(ProductList.productlist[i].transit_acc, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.endNum, TrialBalanceExcel.rowOriginalPosition, TrialBalanceExcel.mSheet)
+            sum2 = TrialBalanceExcel.excel.sumofspecialname(ProductList.productlist[i].inventory, TrialBalanceExcel.billOfAccountNum, TrialBalanceExcel.endNum, TrialBalanceExcel.rowOriginalPosition, TrialBalanceExcel.mSheet)
             trialBINVSheet.Cells(2 + i, 3).Value = sum1 + sum2
             trialBINVSheet.Cells(2 + i, 4).Value = '=c' + str(2 + i) + "-B" + str(2 + i)
             trialBINVSheet.Cells(2 + i, 1).NumberFormatLocal = "0.00"
@@ -159,9 +145,10 @@ class Tonns(object):
         self.createexcel()
         self.computetonns()
         self.computeInventory()
-        self.close()
+
 
 
 if __name__ == "__main__":
     tonns = Tonns("201608")
     tonns.main()
+    tonns.close()
