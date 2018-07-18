@@ -10,13 +10,15 @@ import sys
 class HRTable(object):
     """datetime:%y-%m"""
 
-    def __init__(self, dtime):
+    def __init__(self, dtime, tonns):
         self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), 1,23,0,0)
         self.sheetName = self.dtime.strftime("%B %y")
         self.excel: ExcelApp = None
         self.sheet = None
         self.sheetLst = None
-        self.pleDic = {}
+        self.sheetLstYr = None
+        self.pleDic = []
+        self.tonns: ExcelApp = tonns
 
     excelInPath = DIR_IN + "hr table.xlsx"
     excelOutPath = DIR_OUT + "hr table.xlsx"
@@ -42,15 +44,41 @@ class HRTable(object):
 
         for x in l:
             key, value = x.strip('\n').split(':')
-            self.pleDic[key] = float(value)
+            self.pleDic.append(float(value))
         f.close()
 
     def handle(self):
         self.sheetLst.Range("A1", "J42").Copy(self.sheet.Range("A1", "J42"))
+        self.sheet.Cells(1, 2).Value = self.dtime.strftime("%Y-%m")
+        self.sheet.Cells(3, 2).Value = "=B4+B5"
+        self.sheet.Cells(10, 2).Value = "=SUM(B11:B15)"
+        for i in range(6):
+            self.sheet.Cells(i + 4, 2).Value = self.pleDic[i]
+            self.sheet.Cells(i + 4, 2).NumberFormatLocal = "0"
+            self.sheet.Cells(i + 11, 2).Value = self.pleDic[i + 6]
+            self.sheet.Cells(i + 11, 2).NumberFormatLocal = "0"
+
+        b16 = self.pleDic[-1]
+        self.sheet.Cells(17, 2).Value = TrialBalanceExcel.excel.sumofspecialname(HRTable.hrWagesFound,TrialBalanceExcel.billOfAccountNum,TrialBalanceExcel.currentBorrowNum, TrialBalanceExcel.rowOriginalPosition,TrialBalanceExcel.mSheet)
+        self.sheet.Cells(18, 2).Value = "=B17/B16"
+        self.sheet.Cells(20, 2).Value = TrialBalanceExcel.excel.sumofspecialname(HRTable.hrSalesEfficiencyRMB,TrialBalanceExcel.billOfAccountNum,TrialBalanceExcel.currentLoadNum, TrialBalanceExcel.rowOriginalPosition,TrialBalanceExcel.mSheet) / b16
+        tonnsSheet = self.tonns.getsheetfromname(TonnsExcel.sheetNameQuantity)
+        hrSalesEfficiencyMTValue = str(tonnsSheet.Cells(HRTable.hrSalesEfficiencyMT, TonnsExcel.columnMonthOffset + self.dtime.month).Value)
+        self.sheet.Cells(19, 2).Value = float(hrSalesEfficiencyMTValue)
+        if self.excel.wBook.Sheets.Count >= 13:
+            self.sheetLstYr = self.excel.wBook.Sheets[self.excel.wBook.Sheets.Count - 13]
+        lastObject = self.excel.copycolumnfromsheet(1, 2, 20, self.sheetLst)
+        for i in range(lastObject.__len__()):
+            self.sheet.Cells(i + 1, 3).Value = lastObject[i]
+        lastObject = self.excel.copycolumnfromsheet(1, 2, 20, self.sheetLstYr)
+        for i in range(lastObject.__len__()):
+            self.sheet.Cells(i + 1, 5).Value = lastObject[i]
+        self.sheet.Range("A1", "F20").EntireColumn.AutoFit()
 
     def close(self):
         self.sheetLst = None
         self.sheet = None
+        self.sheetLstYr = None
         self.excel.close()
         basicinfoclose()
 
@@ -62,10 +90,12 @@ class HRTable(object):
         self.createnewsheet()
         print("处理数据")
         self.handle()
-
+        print("HR 表格完成")
 
 if __name__ == "__main__":
-    hr = HRTable("201608")
+    tonns = ExcelApp()
+    tonns.open(TonnsExcel.outPath, SECRET)
+    hr = HRTable("201608", tonns)
     hr.main()
     hr.close()
 

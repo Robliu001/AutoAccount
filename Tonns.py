@@ -29,7 +29,6 @@ class Tonns(object):
         self.qSheet = None
         self.aSheet = None
         self.tonns.close()
-        basicinfoclose()
 
 
     def computetonns(self):
