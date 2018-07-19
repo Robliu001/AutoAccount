@@ -8,7 +8,7 @@ class Tonns(object):
 
     def __init__(self, dtime):
         self.tonns : ExcelApp = None
-        self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), 1,23,0,0)
+        self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), int(dtime[6:8]),23,0,0)
         print("生成月份：", self.dtime)
         self.qSheet = None
         self.aSheet = None
@@ -148,6 +148,6 @@ class Tonns(object):
 
 
 if __name__ == "__main__":
-    tonns = Tonns("201608")
+    tonns = Tonns("20160831")
     tonns.main()
     tonns.close()

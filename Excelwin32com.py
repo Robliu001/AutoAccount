@@ -276,6 +276,13 @@ class ExcelApp(object):
             powIndex += 1
         return result
 
+    @staticmethod
+    def converttofloat(value):
+        if value:
+            return float(re.sub('[,]', '', str(value)))
+        else:
+            return 0
+
     def sumandnamelist(self, *args, nameindex, startrow, sheet=None):
         try:
             result = []

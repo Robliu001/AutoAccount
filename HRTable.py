@@ -8,10 +8,16 @@ import sys
 
 
 class HRTable(object):
-    """datetime:%y-%m"""
+    excelInPath = DIR_IN + "hr table.xlsx"
+    excelOutPath = DIR_OUT + "hr table.xlsx"
+    hrText = DIR_IN + "hr.txt"
+    hrWagesFound = "66020110"
+    hrSalesEfficiencyRMB = "6001"
+    hrSalesEfficiencyMT = 27
 
+    """datetime:%y-%m"""
     def __init__(self, dtime, tonns):
-        self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), 1,23,0,0)
+        self.dtime = datetime.datetime(int(dtime[:4]), int(dtime[4:6]), int(dtime[6:8]),23,0,0)
         self.sheetName = self.dtime.strftime("%B %y")
         self.excel: ExcelApp = None
         self.sheet = None
@@ -19,13 +25,6 @@ class HRTable(object):
         self.sheetLstYr = None
         self.pleDic = []
         self.tonns: ExcelApp = tonns
-
-    excelInPath = DIR_IN + "hr table.xlsx"
-    excelOutPath = DIR_OUT + "hr table.xlsx"
-    hrText = DIR_IN + "hr.txt"
-    hrWagesFound = "66020110"
-    hrSalesEfficiencyRMB = "6001"
-    hrSalesEfficiencyMT = 27
 
     def createnewsheet(self):
         if os.path.exists(DIR_OUT) == False:
@@ -49,7 +48,7 @@ class HRTable(object):
 
     def handle(self):
         self.sheetLst.Range("A1", "J42").Copy(self.sheet.Range("A1", "J42"))
-        self.sheet.Cells(1, 2).Value = self.dtime.strftime("%Y-%m")
+        self.sheet.Cells(1, 2).Value = self.dtime.strftime("%Y-%m-%d")
         self.sheet.Cells(3, 2).Value = "=B4+B5"
         self.sheet.Cells(10, 2).Value = "=SUM(B11:B15)"
         for i in range(6):
@@ -95,7 +94,7 @@ class HRTable(object):
 if __name__ == "__main__":
     tonns = ExcelApp()
     tonns.open(TonnsExcel.outPath, SECRET)
-    hr = HRTable("201608", tonns)
+    hr = HRTable("20160831", tonns)
     hr.main()
     hr.close()
 
